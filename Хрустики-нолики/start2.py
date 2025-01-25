@@ -16,7 +16,7 @@ active_pl = 1
 window = Tk()  # створення вікна
 
 window.title("Хрестики-нулики")  # заголовок
-window.geometry("460x600")
+window.geometry("470x600")
 window.resizable(False, False)
 
 def iswinner():
@@ -52,6 +52,21 @@ def iswinner():
     elif (3 in player1) and (5 in player1) and (7 in player1):
         winner = 1
     elif (3 in player2) and (5 in player2) and (7 in player2):
+        winner = 2
+
+    elif (1 in player1) and (4 in player1) and (7 in player1):
+        winner = 1
+    elif (1 in player2) and (4 in player2) and (7 in player2):
+        winner = 2
+
+    elif (2 in player1) and (5 in player1) and (8 in player1):
+        winner = 1
+    elif (2 in player2) and (5 in player2) and (8 in player2):
+        winner = 2
+
+    elif (3 in player1) and (6 in player1) and (9 in player1):
+        winner = 1
+    elif (3 in player2) and (6 in player2) and (9 in player2):
         winner = 2
     
     if winner == 1:
@@ -130,41 +145,41 @@ def buttonClick(id):
     iswinner()
         
 
-button1 = Button(window, text = '___')  # кнопка
+button1 = Button(window, text = '__')  # кнопка
 button1.grid(row=0, column=0, ipadx=40, ipady=40, sticky="snew")
-button1.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"), command=lambda:buttonClick(1))
+button1.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"), command=lambda:buttonClick(1))
 
-button2 = Button(window, text = '___')  # кнопка
+button2 = Button(window, text = '__')  # кнопка
 button2.grid(row=0, column=1, ipadx=40, ipady=40, sticky="snew")
-button2.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(2))
+button2.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"),command=lambda:buttonClick(2))
 
-button3 = Button(window, text = '___')  # кнопка
+button3 = Button(window, text = '__')  # кнопка
 button3.grid(row=0, column=2, ipadx=40, ipady=40, sticky="snew")
-button3.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(3))
+button3.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"),command=lambda:buttonClick(3))
 
-button4 = Button(window, text = '___')  # кнопка
+button4 = Button(window, text = '__')  # кнопка
 button4.grid(row=1, column=0, ipadx=40, ipady=40, sticky="snew")
-button4.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(4))
+button4.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"),command=lambda:buttonClick(4))
 
-button5 = Button(window, text = '___')  # кнопка
+button5 = Button(window, text = '__')  # кнопка
 button5.grid(row=1, column=1, ipadx=40, ipady=40, sticky="snew")
-button5.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(5))
+button5.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"),command=lambda:buttonClick(5))
 
-button6 = Button(window, text = '___')  # кнопка
+button6 = Button(window, text = '__')  # кнопка
 button6.grid(row=1, column=2, ipadx=40, ipady=40, sticky="snew")
-button6.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(6))
+button6.config(bg='#e3e3e3',fg = '#4286969697f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(6))
 
-button7 = Button(window, text = '___')  # кнопка
+button7 = Button(window, text = '__')  # кнопка
 button7.grid(row=2, column=0, ipadx=40, ipady=40, sticky="snew")
-button7.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(7))
+button7.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"),command=lambda:buttonClick(7))
 
-button8 = Button(window, text = '___')  # кнопка
+button8 = Button(window, text = '__')  # кнопка
 button8.grid(row=2, column=1, ipadx=40, ipady=40, sticky="snew")
-button8.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"),command=lambda:buttonClick(8))
+button8.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"),command=lambda:buttonClick(8))
 
-button9 = Button(window, text = '___')  # кнопка
+button9 = Button(window, text = '__')  # кнопка
 button9.grid(row=2, column=2, ipadx=40, ipady=40, sticky="snew")
-button9.config(bg='#e3e3e3',fg = '#4287f5', font = ('Arial',30, "bold"), command=lambda:buttonClick(9))
+button9.config(bg='#e3e3e3',fg = '#696969', font = ('Arial',30, "bold"), command=lambda:buttonClick(9))
 
 label1 = Label(window)
 label1.config(text = f'Виграв нулик: {win_zeros}', bg='#ffffff', fg = '#000000', font = 'Arial, 15')
@@ -184,12 +199,11 @@ def clear_():
     global game_steps
     global active_pl
 
-    player1 = []  # Очищення списку ходів гравця 1
-    player2 = []  # Очищення списку ходів гравця 2
-    game_steps = 0  # Скидання кількості ходів
-    active_pl = 1  # Встановлення активного гравця на першого
+    player1 = []  
+    player2 = []  
+    game_steps = 0  
+    active_pl = 1  
     
-    # Очищення тексту кнопок і повернення їх у початковий стан
     button1.config(text='__', state=NORMAL)
     button2.config(text='__', state=NORMAL)
     button3.config(text='__', state=NORMAL)

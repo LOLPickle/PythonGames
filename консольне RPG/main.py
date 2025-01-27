@@ -45,7 +45,7 @@ while True:
     # Перевіряємо натискання клавіші 'q' для виходу
     if keyboard.is_pressed('q'):
         print("\033c", end="")  # Очистка консолі перед виходом
-        break  # Вихід з циклу при натисканні 'q'
+        break  # Вихід з циклу
 
     # Оновлюємо мапу
     simple_map = [['.'] * len(simple_map[0]) for _ in range(len(simple_map))]  # Оновлюємо карту, заповнюючи її точками

@@ -88,12 +88,17 @@ def main():
 
     while True:
         print("\033c", end="")  # Очищення екрану
-        print('CONSOLE RPG\n')
+        print('   ____     _____   ___    __   _____    _____    _       ______ ')
+        print('  / ___|   /  _  \  ||\\    ||  / ____|  /  _   \ | |     |  ____|')
+        print(' | |      |  | |  | || \\   || | |____  |  | |  | | |     | |__   ')
+        print(' | |      |  | |  | ||  \\  ||  \___  | |  | |  | | |     |  __|  ')
+        print(' | |___   |  |_|  | ||   \\ ||   ___| | |  |_|  | | |____ | |____ ')
+        print('  \____|   \_____/  ||    \\||  /_____/  \_____/  |______||______|\n')
 
         # Відображення пунктів меню
         print("> play" if current_option == 1 else "  play")
-        print("> settings" if current_option == 2 else "  settings")
-        print("> exit" if current_option == 3 else "  exit")
+        print("> settings                                                     ↑   " if current_option == 2 else "  settings                                                     ↑   ")
+        print("> exit                                                       ← ↓ →" if current_option == 3 else "  exit                                                       ← ↓ →")
 
         # Обробка натискань клавіш
         if keyboard.is_pressed('up'):

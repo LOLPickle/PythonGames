@@ -6,40 +6,43 @@ import keyboard
 # Ініціалізація
 init()
 
-wins = 0
+with open("statik.txt", "r") as file:
+    content = file.read()
+
+wins = int(content)
 
 player = '@'   #має бути довжина не більше 1 символа
 
 def generate_maze(width, height):
     # Ініціалізація сітки
-    maze = [["#" for _ in range(width)] for _ in range(height)]
-    visited = [[False for _ in range(width)] for _ in range(height)]
+    maze = [["#" for _ in range(width)] for _ in range(height)]  #2D лабіринт
+    visited = [[False for _ in range(width)] for _ in range(height)]  #Той самий лабіринт але для відстеження вільних клітинок
 
     # Початкова точка
     start_x, start_y = 1, 1
-    maze[start_y][start_x] = " "
+    maze[start_y][start_x] = " "  # початкова позиція
     visited[start_y][start_x] = True
 
     # Напрямки руху: (dx, dy)
-    directions = [(0, -2), (0, 2), (-2, 0), (2, 0)]
+    directions = [(0, -2), (0, 2), (-2, 0), (2, 0)]  #можливі напрямки вгору, вниз, вперед, назад
 
     def is_valid(x, y):
         return 0 < x < width - 1 and 0 < y < height - 1 and not visited[y][x]
 
-    def carve_path(x, y):
+    def carve_path(x, y):  #перевіряє чи відвідана клітинка x, y
         random.shuffle(directions)
-        for dx, dy in directions:
+        for dx, dy in directions:  # nx, ny координати до яких прямує алгоритм
             nx, ny = x + dx, y + dy
             if is_valid(nx, ny):
-                maze[y + dy // 2][x + dx // 2] = " "  # Відкриваємо стіну між клітинками
+                maze[y + dy // 2][x + dx // 2] = " "  # Відкриваємо стіну між клітинками він ніби прорізає шлях
                 maze[ny][nx] = " "  # Відкриваємо нову клітинку
-                visited[ny][nx] = True
+                visited[ny][nx] = True  # позначається як відвідана
                 carve_path(nx, ny)
 
     # Запуск генерації лабіринту
     carve_path(start_x, start_y)
 
-    return maze
+    return maze  #виводимо лабіринт
 
 def print_maze(maze):
     for row in maze:

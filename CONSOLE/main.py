@@ -8,7 +8,7 @@ init()
 
 wins = 0
 
-import random
+player = '@'   #має бути довжина не більше 1 символа
 
 def generate_maze(width, height):
     # Ініціалізація сітки
@@ -89,14 +89,14 @@ def Game():
         current_map = [row.copy() for row in initial_map]
 
         # Встановлюємо поточну позицію гравця як '@'
-        current_map[y][x] = '@'
+        current_map[y][x] = player
 
         # Виводимо нову мапу
         for row in current_map:
             print(''.join(row))  # Виводимо кожен рядок карти як рядок символів
 
         # Вивести координати для перевірки
-        print(x, y)
+        print(f'position -\n x = {x}\n y = {y}')
 
         # Перевірка досягнення фінішу
         if x == 39 and y == 19:  # Ваші координати фінішу
@@ -180,13 +180,13 @@ def main():
             current_option -= 1
             if current_option < 1:
                 current_option = options  # Переходить до останнього пункту
-            time.sleep(0.2)  # Затримка для стабільності
+            time.sleep(0.1)  # Затримка для стабільності
 
         elif keyboard.is_pressed('down'):
             current_option += 1
             if current_option > options:
                 current_option = 1  # Переходить до першого пункту
-            time.sleep(0.2)  # Затримка для стабільності
+            time.sleep(0.1)  # Затримка для стабільності
 
         elif keyboard.is_pressed('enter'):  # Вибір пункту меню
             if current_option == 1:
@@ -204,6 +204,7 @@ def main():
             elif current_option == 3:
                 print("Вихід з програми...")
                 time.sleep(1)
+                exit()
                 exit()
         
         time.sleep(0.1)

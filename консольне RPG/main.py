@@ -6,6 +6,8 @@ import keyboard
 # Ініціалізація
 init()
 
+wins = 0
+
 import random
 
 def generate_maze(width, height):
@@ -44,24 +46,27 @@ def print_maze(maze):
         print("".join(row))
 
 # Параметри лабіринту
-width, height = 21, 21  # Розміри лабіринту (мають бути непарними)
+width, height = 41, 21  # Розміри лабіринту (мають бути непарними)
 
 # Мапа (двовимірний список)
 simple_map = generate_maze(width, height)
+simple_map[19][39] = '$'
 # Початкова позиція
 x, y = 1, 1  # Позиція на карті (x, y)
 
 initial_map = [row.copy() for row in simple_map]
 
 def Game():
-    global x, y, simple_map, initial_map
+    global x, y, simple_map, initial_map, wins
     # Очищаємо консоль
     print("\033c", end="")  # ANSI escape code для очищення екрану
-    print("Натисніть 'q' для виходу...")
 
     # Основний цикл гри
     while True:
-        print("\033c", end="")
+        print("\033c", end="")  # Очищаємо екран кожен раз
+        print("Натисніть 'q' для виходу...")
+
+        # Управління персонажем
         if keyboard.is_pressed('right') and x < len(simple_map[0]) - 1:  # Перевірка меж карти
             if simple_map[y][x + 1] != '#':  # Якщо справа немає стіни
                 x += 1  # Рух вправо
@@ -90,7 +95,56 @@ def Game():
         for row in current_map:
             print(''.join(row))  # Виводимо кожен рядок карти як рядок символів
 
-        time.sleep(0.1)  # Зменшена затримка для кращої чутливості
+        # Вивести координати для перевірки
+        print(x, y)
+
+        # Перевірка досягнення фінішу
+        if x == 39 and y == 19:  # Ваші координати фінішу
+            print("Вітаємо, ви досягли фінішу!")
+            wins += 1
+            x, y = 1, 1  # Скидаємо початкові координати
+
+            # Вивести опції після досягнення фінішу
+            print('\n "q" - вихід\n "c" - продовжити')
+
+            # Цикл вибору дії після завершення гри
+            while True:
+                if keyboard.is_pressed('q'):
+                    simple_map = generate_maze(width, height)
+                    simple_map[19][39] = '$'
+                    initial_map = [row.copy() for row in simple_map]
+                    
+                    print("\033c", end="")  # Очистка консолі перед виходом
+                    main()
+                    break
+                if keyboard.is_pressed('c'):
+                    simple_map = generate_maze(width, height)
+                    simple_map[19][39] = '$'
+                    initial_map = [row.copy() for row in simple_map]
+
+                    print("\033c", end="")  # Очистка консолі перед виходом
+                    Game()  # Перезапускаємо гру
+                    break
+
+        # Затримка для чутливості
+        time.sleep(0.1)
+
+
+def statik():
+    global wins
+
+    print("\033c", end="")  # Очищення екрану
+
+    print("Натисніть 'q' для виходу...")
+
+    print('\n----Статистика----\n')
+    print(f'\nпройдених лабіринтів - {wins}')
+    while True:
+
+        if keyboard.is_pressed('q'):
+                print("\033c", end="")  # Очистка консолі перед виходом
+                main()
+                break
 
 
 
@@ -111,7 +165,7 @@ def main():
 
         # Відображення пунктів меню
         print("> play" if current_option == 1 else "  play")
-        print("> settings                                                     ↑   " if current_option == 2 else "  settings                                                     ↑   ")
+        print("> statistics                                                   ↑   " if current_option == 2 else "  statistics                                                   ↑   ")
         print("> exit                                                       ← ↓ →" if current_option == 3 else "  exit                                                       ← ↓ →")
 
         # Обробка натискань клавіш
@@ -135,7 +189,9 @@ def main():
                 Game()
                 break
             elif current_option == 2:
-                print("Відкриття налаштувань...")
+                print("Відкриття статистики...")
+                print("\033c", end="")
+                statik()
                 time.sleep(1)
                 break
             elif current_option == 3:
@@ -144,9 +200,6 @@ def main():
                 exit()
         
         time.sleep(0.1)
-    
-
-
     
 
 if __name__ == "__main__":
